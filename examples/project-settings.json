@@ -1,0 +1,14 @@
+{
+  "extraKnownMarketplaces": {
+    "superpowers-marketplace": {
+      "source": { "source": "github", "repo": "obra/superpowers-marketplace" }
+    },
+    "superpowers-ruflo-bridge": {
+      "source": { "source": "github", "repo": "ozdemirumit/superpowers-ruflo-bridge" }
+    }
+  },
+  "enabledPlugins": {
+    "superpowers@superpowers-marketplace": true,
+    "ruflo-memory@superpowers-ruflo-bridge": true
+  }
+}

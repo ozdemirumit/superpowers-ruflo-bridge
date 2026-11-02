@@ -1,0 +1,11 @@
+{
+  "name": "ruflo-memory",
+  "description": "Bridge between Superpowers and Ruflo: Superpowers stays the workflow/orchestration layer, Ruflo is exposed only as a persistent, searchable memory (6 memory tools, swarm/agent tools hidden and blocked).",
+  "version": "0.1.0",
+  "author": {
+    "name": "Ümit Özdemir"
+  },
+  "repository": "https://github.com/ozdemirumit/superpowers-ruflo-bridge",
+  "license": "MIT",
+  "keywords": ["superpowers", "ruflo", "claude-flow", "memory", "mcp"]
+}

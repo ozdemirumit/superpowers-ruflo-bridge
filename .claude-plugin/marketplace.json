@@ -1,0 +1,18 @@
+{
+  "name": "superpowers-ruflo-bridge",
+  "owner": {
+    "name": "Ümit Özdemir"
+  },
+  "metadata": {
+    "description": "Use Superpowers as the workflow layer and Ruflo only as persistent memory.",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "ruflo-memory",
+      "source": "./plugins/ruflo-memory",
+      "description": "Exposes only Ruflo's memory tools (store/search/retrieve/list/delete/stats) plus a memory-bridge skill that hooks into Superpowers workflows.",
+      "version": "0.1.0"
+    }
+  ]
+}

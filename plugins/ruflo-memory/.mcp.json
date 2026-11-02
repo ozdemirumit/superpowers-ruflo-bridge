@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "ruflo-memory": {
+      "command": "node",
+      "args": ["${CLAUDE_PLUGIN_ROOT}/mcp/ruflo-memory-proxy.mjs"],
+      "env": {
+        "RUFLO_VERSION": "3.71.0"
+      }
+    }
+  }
+}
