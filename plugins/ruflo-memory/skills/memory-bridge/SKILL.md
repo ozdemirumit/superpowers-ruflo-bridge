@@ -17,6 +17,15 @@ Never try to start Ruflo swarms, hive-minds, agents, tasks or claims, and never
 run `npx ruflo init` or `claude-flow` CLI orchestration commands. Task
 dispatch, subagents and parallelism always go through Superpowers skills.
 
+## When memory is unavailable
+
+The server connects instantly, but on the very first run Ruflo is downloaded
+in the background (about a minute), so the first memory call can be slow.
+If a memory tool returns an error saying ruflo-memory is unavailable or Ruflo
+refused the call, continue the Superpowers workflow without memory, tell the
+user once in one sentence (including the fix the error names), and do not
+retry in a loop.
+
 ## Recall — before you start
 
 At the start of **brainstorming**, **writing-plans** or **systematic-debugging**:

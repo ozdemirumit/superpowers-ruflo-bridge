@@ -32,8 +32,21 @@ examples/
 
 ## Kurulum
 
-Gereksinim: Node.js 18+ ve npm erişimi (Ruflo `npx` ile indirilir).
-Superpowers ayrı bir plugin'dir, birlikte kurulmalıdır.
+Gereksinim: Node.js 18+ ve npm erişimi. Ruflo'yu ayrıca kurmanız gerekmez;
+ilk açılışta `npx` ile otomatik indirilir. Superpowers ayrı bir plugin'dir,
+birlikte kurulmalıdır.
+
+**İlk açılış:** Proxy Claude Code'a anında bağlanır (araç şemaları sabit),
+Ruflo'yu arka planda başlatır. İlk kez indirilirken bu yaklaşık 1 dakika
+sürer; bu sürede gelen bellek çağrıları sıraya alınır ve Ruflo hazır olunca
+cevaplanır. Sonraki açılışlar npm önbelleğinden gelir.
+
+İsteğe bağlı olarak Ruflo'yu önceden kurarsanız proxy onu kullanır ve
+indirme beklemesi olmaz:
+
+```
+npm install -g @claude-flow/cli@3.71.0
+```
 
 ### Yerel terminal
 
@@ -60,8 +73,33 @@ Bunları `.gitignore`'a ekleyin (`examples/gitignore-additions`).
 
 | Değişken | Varsayılan | Açıklama |
 |---|---|---|
-| `RUFLO_VERSION` | `3.71.0` | Kullanılacak `@claude-flow/cli` sürümü (sabitlenmiş) |
-| `RUFLO_MEMORY_TOOLS` | 6 bellek aracı | Virgülle ayrılmış izinli araç listesi |
+| `RUFLO_VERSION` | `3.71.0` | `npx` ile indirilecek `@claude-flow/cli` sürümü (sabitlenmiş) |
+| `RUFLO_CMD` | — | Ruflo çalıştırılabilir dosyasının yolu; verilirse `npx` kullanılmaz |
+| `RUFLO_MEMORY_TOOLS` | 6 bellek aracı | Virgülle ayrılmış, 6 araçtan seçilmiş alt küme |
+| `RUFLO_STARTUP_TIMEOUT_MS` | `300000` | Ruflo'nun açılması için beklenecek en uzun süre |
+
+Öncelik sırası: `RUFLO_CMD` → PATH'teki `claude-flow` → `npx`.
+
+## Sorun giderme
+
+**MCP sunucusu bağlanamadı / zaman aşımı (0.1.0):** İlk sürüm Ruflo
+inene kadar bağlantıyı bekletiyordu ve ilk açılışta 30 saniyelik sınırı
+aşıyordu. 0.2.0 ile düzeltildi; plugin'i güncelleyin.
+
+**`policy-anchor-log-missing` veya `policy-ledger-truncated`:** Ruflo,
+her proje için proje dışında (`~/.config/ruflo/policy-trust/`) bir
+kurcalama-koruma kaydı tutar. Projedeki `.claude-flow/` klasörü silinir
+veya sıfırlanırsa (ör. `git clean -fdx`) Ruflo tüm çağrıları reddeder.
+Proje kökünde şunu çalıştırın:
+
+```
+node ~/.claude/plugins/cache/superpowers-ruflo-bridge/ruflo-memory/<sürüm>/mcp/reset-ruflo-trust.mjs
+```
+
+Script yalnızca bu projenin kaydını ve `.claude-flow/policy` klasörünü
+siler; `.swarm/` içindeki anılar korunur. Sonra yeni bir oturum açın.
+Bu yüzden `git clean -fdx` kullanıyorsanız `-e .claude-flow -e .swarm`
+ekleyin.
 
 ## Anlamsal arama notu
 
